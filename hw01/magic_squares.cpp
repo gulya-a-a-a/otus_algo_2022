@@ -48,9 +48,11 @@ std::vector<DrawingConditionPredicate> predicates = {
 
     // 09
     [](int x, int y, int squareSize) {
-        auto shift = squareSize / 2 - 2;
-        return (y > x + shift) || (y + shift < x);
+        return std::abs(x - y) > squareSize * 0.4;
     },
+
+    // 10 (not implemented)
+    [](int x, int y, int squareSize) { return false; },
 
     // 11
     [](int x, int y, int squareSize) {
@@ -64,10 +66,14 @@ std::vector<DrawingConditionPredicate> predicates = {
         return (pow(y, 2) + pow(x, 2)) < radiusSquared;
     },
 
+    // 13 (not implemented)
+    [](int x, int y, int squareSize) { return false; },
+
     // 14
     [](int x, int y, int squareSize) {
         uint32_t radiusSquared = pow(21, 2);
-        return (pow(y - squareSize, 2) + pow(x - squareSize, 2)) > radiusSquared;
+        return (pow(y - squareSize, 2) + pow(x - squareSize, 2)) >
+               radiusSquared;
     }};
 
 int main(int argc, char const *argv[]) {
