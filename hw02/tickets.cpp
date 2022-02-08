@@ -1,22 +1,38 @@
-#include <iostream>
+#include "tickets.hpp"
 
-int main(int argc, char const *argv[])
-{
-    int maxNumber = 1000;
-    unsigned int count = 0;
+#include "GetLuckyAnotherWayBruteforce.hpp"
+#include "GetLuckyBestAlgo.hpp"
+#include "GetLuckyRecursion.hpp"
+#include "GetLuckySixBruteforce.hpp"
 
-    for (int leftSide = 0; leftSide < maxNumber; leftSide++)
-    {
-        unsigned int leftSum = (leftSide / 100) + (leftSide / 10) % 10 + (leftSide % 10);
-        for (int rightSide = 0; rightSide < maxNumber; rightSide++)
-        {
-            unsigned int rightSum = (rightSide / 100) + (rightSide / 10) % 10 + (rightSide % 10);
-            if (leftSum == rightSum)
-            {
-                count++;
-            }
-        }
+template <typename TaskType> void runTask() {
+    TestRunner<TaskType> runner("./1.Tickets");
+    runner.runTests();
+}
+
+std::vector<void (*)()> algoVariants = {
+    runTask<GetLuckySixBruteforceTask>, runTask<GetLuckyRecursionTask>,
+    runTask<GetLuckyAnotherWayBruteforceTask>, runTask<GetLuckyBestAlgoTask>};
+
+int main(int argc, char const *argv[]) {
+    std::uint32_t var{};
+    std::string input{};
+
+    while (true) {
+        std::cout << "Please enter implementation variant [1.."
+                  << algoVariants.size() << "] or 'q' to quit: ";
+
+        std::cin >> input;
+        if (input == "q")
+            return EXIT_SUCCESS;
+
+        var = std::atoi(input.c_str()) - 1;
+
+        if (var >= algoVariants.size())
+            continue;
+
+        algoVariants[var]();
     }
-    std::cout << count;
-    return 0;
+
+    return EXIT_SUCCESS;
 }
