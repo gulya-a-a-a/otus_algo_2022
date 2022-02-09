@@ -1,5 +1,12 @@
 #include <vector>
 
+/**
+ * @brief The best way to find the number of lucky tickets.
+ * Algorithm complexity: O(N^3)
+ *
+ * @param  {int} N          : Number of digits in a half of a value.
+ * @return {std::uint64_t}  : Number of lucky tickets for N-figure numbers.
+ */
 std::uint64_t GetLuckyBestAlgo(size_t N) {
     std::uint64_t result{};
 
@@ -31,8 +38,11 @@ std::uint64_t GetLuckyBestAlgo(size_t N) {
     return result;
 }
 
+/**
+ * @brief Task class to test solution through selfmade test system.
+ */
 class GetLuckyBestAlgoTask : public ITestTask {
-  public:
+public:
     GetLuckyBestAlgoTask(std::string &input, std::string &output)
         : ITestTask(input, output) {}
 

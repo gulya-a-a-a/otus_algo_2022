@@ -5,7 +5,8 @@
 #include "GetLuckyRecursion.hpp"
 #include "GetLuckySixBruteforce.hpp"
 
-template <typename TaskType> void runTask() {
+template <typename TaskType>
+void runTask() {
     TestRunner<TaskType> runner("./1.Tickets");
     runner.runTests();
 }
@@ -19,8 +20,8 @@ int main(int argc, char const *argv[]) {
     std::string input{};
 
     while (true) {
-        std::cout << "Please enter implementation variant [1.."
-                  << algoVariants.size() << "] or 'q' to quit: ";
+        std::cout << "Please enter implementation variant [1.." << algoVariants.size()
+                  << "] or 'q' to quit: ";
 
         std::cin >> input;
         if (input == "q")

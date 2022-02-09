@@ -1,5 +1,13 @@
 static size_t count = 0;
 
+/**
+ * @brief A recursive way to find the number of lucky tickets.
+ * Algorithm complexity: O(10^N)
+ *
+ * @param  {int} N       : Number of digits in a half of a value.
+ * @param  {size_t} sumA : Sum of digits of the left side.
+ * @param  {size_t} sumB : Sum of digits of the right side.
+ */
 void GetLuckyTicketRecursion(int N, size_t sumA, size_t sumB) {
     if (N == 0) {
         if (sumA == sumB)
@@ -12,8 +20,11 @@ void GetLuckyTicketRecursion(int N, size_t sumA, size_t sumB) {
             GetLuckyTicketRecursion(N - 1, sumA + a, sumB + b);
 }
 
+/**
+ * @brief Task class to test solution through selfmade test system.
+ */
 class GetLuckyRecursionTask : public ITestTask {
-  public:
+public:
     GetLuckyRecursionTask(std::string &input, std::string &output)
         : ITestTask(input, output) {}
 

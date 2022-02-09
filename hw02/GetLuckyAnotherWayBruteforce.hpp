@@ -1,3 +1,9 @@
+/**
+ * @brief Brute force method to find the number of six-figure lucky tickets.
+ * Algorithm complexity: O(10^N)
+ *
+ * @return {size_t}  : Number of lucky tickets for six-figure numbers.
+ */
 size_t GetLuckyAnotherWayBruteforce() {
 
     size_t base = 10, count{};
@@ -26,7 +32,7 @@ size_t GetLuckyAnotherWayBruteforce() {
 
 class GetLuckyAnotherWayBruteforceTask : public ITestTask {
 
-  public:
+public:
     GetLuckyAnotherWayBruteforceTask(std::string &input, std::string &output)
         : ITestTask(input, output) {}
 
