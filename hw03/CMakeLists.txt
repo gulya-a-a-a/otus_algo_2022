@@ -4,3 +4,5 @@ project(algebraic_algorithms VERSION 0.0.1)
 
 
 add_subdirectory(power)
+add_subdirectory(fibo)
+add_subdirectory(prime)

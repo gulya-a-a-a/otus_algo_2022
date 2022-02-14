@@ -1,13 +1,11 @@
 #include <iostream>
-#include <cmath>
-#include <iomanip>
 #include "../../test_module/test_module.hpp"
 
-#include "iterative.hpp"
+#include "divisorsEnumeration.hpp"
 
 int main(int argc, char const *argv[])
 {
-    TestRunner<IterativePowerTask> runner("./3.Power/");
+    TestRunner<PrimeByDivisorsCountingTask> runner("./5.Primes/");
     runner.runTests();
     return 0;
 }
