@@ -1,28 +1,32 @@
 
-std::uint64_t findKingMoves(std::uint8_t position)
+std::uint64_t findKnightMoves(std::uint8_t position)
 {
     std::uint64_t K = 1UL << position,
                   AMask = 0xfefefefefefefefe,
+                  BMask = 0xfdfdfdfdfdfdfdfd,
+                  GMask = 0xbfbfbfbfbfbfbfbf,
                   HMask = 0x7f7f7f7f7f7f7f7f,
                   Ka = K & AMask,
-                  Kh = K & HMask;
+                  Kab = Ka & BMask,
+                  Kh = K & HMask,
+                  Kgh = Kh & GMask;
 
-    std::uint64_t result = (Ka << 7) | (K << 8) | (Kh << 9) |
-                           (Ka >> 1) | (Kh << 1) |
-                           (Ka >> 9) | (K >> 8) | (Kh >> 7);
+    std::uint64_t result = (Ka << 15) | (Kh << 17) |  // top
+                           (Kab << 6) | (Kab >> 10) | // left
+                           (Ka >> 17) | (Kh >> 15) |  // bottom
+                           (Kgh >> 6) | (Kgh << 10);  // right
 
     return result;
 }
 
-class FindKingMovesTask : public ITestTask
+class FindKnightMovesTask : public ITestTask
 {
 public:
-    FindKingMovesTask(std::string &input, std::string &output)
+    FindKnightMovesTask(std::string &input, std::string &output)
         : ITestTask(input, output) {}
 
     void run()
     {
-
         std::ifstream input{m_input},
             output{m_output};
 
@@ -33,12 +37,9 @@ public:
         input >> position;
         output >> expectedNumberOfMoves >> expectedResult;
 
-        std::uint64_t result = findKingMoves(position);
+        std::uint64_t result = findKnightMoves(position);
 
-        auto start = std::chrono::steady_clock::now();
         auto resultedNumberOfMoves = popcnt2(result);
-        auto time = std::chrono::steady_clock::now() - start;
-        std::cout << "\nTime: " << time.count() << " ns\n";
 
         std::cout
             << ((expectedResult == result) && (expectedNumberOfMoves == resultedNumberOfMoves)
