@@ -6,13 +6,15 @@
 
 #include "popcnt1.hpp"
 #include "popcnt2.hpp"
+#include "popcnt_cache.hpp"
 
 #include "king.hpp"
 #include "knight.hpp"
+#include "rook.hpp"
 
 int main(int argc, char const *argv[])
 {
-    TestRunner<FindKnightMovesTask> runner("./0.BITS/2.Bitboard - Knight");
+    TestRunner<FindRookMovesTask> runner("./0.BITS/3.Bitboard - Rook");
     runner.runTests();
     return 0;
 }
