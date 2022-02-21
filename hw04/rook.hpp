@@ -3,16 +3,16 @@ std::uint64_t findRookMoves(std::uint16_t position)
 {
     std::uint32_t rowNumber = static_cast<std::uint32_t>(position / 8UL),
                   rowStartPosition = rowNumber * 8UL,
-                  columnNumber = position - rowStartPosition;
+                  columnNumber = position % 8UL;
 
     std::uint64_t K = 1UL << position,
                   rowMask = (0xffUL << rowStartPosition),
                   columnMask{};
 
-    auto bitMask = 1 << columnNumber;
-    for (size_t i = 0; i < 8; i++)
+    std::uint64_t bitMask = 1 << columnNumber;
+    for (size_t i = 0; i < 8UL; i++)
     {
-        columnMask <<= 8;
+        columnMask <<= 8UL;
         columnMask |= bitMask;
     }
 
