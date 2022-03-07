@@ -36,6 +36,26 @@ public:
         ++mSize;
     }
 
+    void put(T &&item, int index) override
+    {
+        resize();
+
+        std::memmove(&mData[index + 1], &mData[index], (size() - index) * sizeof(T));
+        mData[index] = item;
+
+        ++mSize;
+    }
+
+    T del(int index) override
+    {
+        T result = mData[index];
+
+        std::memmove(&mData[index], &mData[index + 1], (size() - index) * sizeof(T));
+        --mSize;
+
+        return result;
+    }
+
 private:
     size_t mSize;
     T *mData;

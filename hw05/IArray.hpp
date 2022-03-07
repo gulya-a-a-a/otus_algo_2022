@@ -16,6 +16,10 @@ public:
 
     virtual void put(T &&item) = 0;
 
+    virtual void put(T &&item, int index) = 0;
+
+    virtual T del(int index) = 0;
+
 protected:
     virtual void resize() = 0;
 };
