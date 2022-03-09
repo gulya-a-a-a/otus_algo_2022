@@ -4,12 +4,19 @@
 #include "SingleArray.hpp"
 #include "VectorArray.hpp"
 #include "FactoryArray.hpp"
+#include "MatrixArray.hpp"
+
+static const size_t matrixArraySize = 6;
 
 template <typename T>
 void printArray(IArray<T> &array)
 {
     for (size_t i = 0; i < array.size(); i++)
+    {
+        if ((i % matrixArraySize == 0) && (i > 0))
+            std::cout << '\n';
         std::cout << array.get(i) << ' ';
+    }
 
     std::cout << '\n';
 }
@@ -20,19 +27,26 @@ int main(int argc, char const *argv[])
     VectorArray<int, 30> vectorArray;
     FactorArray<int> factorArray;
 
-    std::cout << factorArray.size() << '\n';
+    MatrixArray<int, matrixArraySize> matrixArray;
 
-    for (size_t i = 0; i < 100; i++)
+    std::cout << matrixArray.size() << '\n';
+
+    for (size_t i = 0; i < 92; i++)
     {
-        factorArray.put(i);
+        matrixArray.put(i);
     }
 
-    std::cout << factorArray.size() << '\n';
+    std::cout << matrixArray.size() << '\n';
 
-    factorArray.put(321, 0);
-    printArray(factorArray);
+    matrixArray.put(321, 6);
+    matrixArray.put(444, 44);
+    printArray(matrixArray);
 
-    std::cout << factorArray.del(5) << '\n';
-    printArray(factorArray);
+    std::cout << matrixArray.del(6) << '\n';
+
+    matrixArray.del(7);
+    matrixArray.del(18);
+    printArray(matrixArray);
+
     return 0;
 }
