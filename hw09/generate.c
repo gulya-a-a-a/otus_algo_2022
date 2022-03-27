@@ -26,7 +26,8 @@ int main(int argc, char *const *argv) {
 
   srand(time(NULL));
   for (int i = 0; i < uiMaxCount; ++i) {
-    randomValues[i] = rand() & 0xffff;
+    // randomValues[i] = rand() & 0xffff;
+    randomValues[i] = (uiMaxCount - i) & 0xffff;
   }
 
   FILE *pFile = fopen(szFileName, "wb+");
