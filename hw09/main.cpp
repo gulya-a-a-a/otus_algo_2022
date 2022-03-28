@@ -5,13 +5,15 @@
 #include <vector>
 
 #include "fstreamExtensions.hpp"
+#include "merge.hpp"
 
-#include "quickLomuto.hpp"
+#include "shell.hpp"
 
 #include "externalMerge.hpp"
+#include "externalMergeWithShellSort.hpp"
 
 int main(int argc, char const *argv[]) {
-  std::fstream data("tests/100.bin", data.binary | data.in | data.out);
+  std::fstream data("tests/1000000.bin", data.binary | data.in | data.out);
 
   if (!data.is_open()) {
     std::cout << "Error during file opening process.\n"
@@ -20,7 +22,7 @@ int main(int argc, char const *argv[]) {
   }
 
   auto start = std::chrono::high_resolution_clock::now();
-  mergeSort<short>(data);
+  mergeSortWithShell<short>(data);
   std::chrono::duration<double, std::milli> duration =
       std::chrono::high_resolution_clock::now() - start;
   std::cout << duration.count() << " ms\n";
