@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include <sstream>
 
 #include "hash_table_chaining.hpp"
 
@@ -7,14 +8,26 @@ template <typename TKey, typename T>
 using HashTablePtr = std::unique_ptr<HashTable<TKey, T>>;
 
 int main(int argc, char const *argv[]) {
-  HashTableChaining<std::uint16_t, int> ht;
+  size_t count = 25;
+  std::stringstream ss;
 
-  size_t count = 20;
+  HashTableChaining<std::string, int> ht;
 
-  srand(time(nullptr));
   for (size_t i = 0; i < count; i++) {
-    ht.add(i, rand() % count);
+    ss << i;
+    ht.put(ss.str(), i);
+    ss.str("");
   }
+  auto result = ht["7"];
+  if (result.has_value()) {
+    std::cout << ht["7"].value() << '\n';
+  }
+
+  bool found = ht.containsKey("3");
+
+  auto removed = ht.remove("3");
+
+  found = ht.containsKey("3");
 
   return EXIT_SUCCESS;
 }
