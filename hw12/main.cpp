@@ -1,3 +1,4 @@
+#include <cassert>
 #include <iostream>
 #include <memory>
 #include <sstream>
@@ -19,15 +20,18 @@ int main(int argc, char const *argv[]) {
     ss.str("");
   }
   auto result = ht["7"];
-  if (result.has_value()) {
-    std::cout << ht["7"].value() << '\n';
-  }
+  assert(result.has_value() == true);
+  assert(ht["7"].value() == 7);
 
   bool found = ht.containsKey("3");
+  assert(found == true);
 
   auto removed = ht.remove("3");
+  assert(removed.has_value() == true);
+  assert(removed.value() == 3);
 
   found = ht.containsKey("3");
+  assert(found == false);
 
   return EXIT_SUCCESS;
 }
