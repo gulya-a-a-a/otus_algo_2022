@@ -21,7 +21,7 @@ static std::vector<sortingFunc<int>> sortings = {
 int main(int argc, char const *argv[])
 {
 
-    for (size_t i = 100; i < 10000000; i *= 10)
+    for (size_t i = 1000000; i < 10000000; i *= 10)
     {
         std::cout << '\n';
         std::stringstream ss;
