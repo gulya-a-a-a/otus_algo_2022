@@ -74,7 +74,7 @@ public:
 
   TreeNode *treeMinimum(TreeNode *root) {
     TreeNode *node = root;
-    while (node != nullptr) {
+    while (node->left != nullptr) {
       node = node->left;
     }
     return node;
