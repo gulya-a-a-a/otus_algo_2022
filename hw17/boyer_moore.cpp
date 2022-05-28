@@ -1,7 +1,13 @@
+#include <algorithm>
 #include <array>
 #include <cassert>
 #include <iostream>
+#include <string_view>
+#include <vector>
 
+static const size_t asciiAlphabetLength = 128;
+
+#include "boyer_moore.hpp"
 #include "substring_search.hpp"
 
 struct StringTestData {
@@ -10,12 +16,11 @@ struct StringTestData {
   int result;
 };
 
-static std::array<StringTestData, 9UL> testData{
-    {{"", "", 0},
-     {"ABC", "BCA", -1},
+static std::array<StringTestData, 8UL> testData{
+    {{"ABC", "BCA", -1},
      {"STROSTRING", "STRING", 4},
      {"ABC", "ABC", 0},
-     {"KOLOdKOLOKOL", "KOLOKOL", 5},
+     {"KOOLOOKOLOKOL", "KOLOKOL", 6},
      {"AAAAAAAAAAAA", "BAAAAAA", -1},
      {"AAAAABAAAAAA", "BAAAAAA", 5},
      {"AAAAAAAAAAAA", "AAAAAAB", -1},
@@ -25,10 +30,10 @@ int main(int argc, char const *argv[]) {
   auto &tmp = testData;
 
   for (auto &&test : testData) {
-    std::cout << test.text << '\n';
-    // assert(bruteForce(test.text, test.pattern) == test.result);
-    // assert(prefixShift(test.text, test.pattern) == test.result);
+    assert(bruteForce(test.text, test.pattern) == test.result);
+    assert(prefixShift(test.text, test.pattern) == test.result);
     assert(suffixShift(test.text, test.pattern) == test.result);
+    assert(boyerMoore(test.text, test.pattern) == test.result);
   }
 
   return EXIT_SUCCESS;

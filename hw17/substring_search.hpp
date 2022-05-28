@@ -1,5 +1,3 @@
-#include <array>
-#include <string_view>
 
 int bruteForce(std::string_view text,      // STRONGSTRING
                std::string_view pattern) { // STRING
@@ -18,8 +16,6 @@ int bruteForce(std::string_view text,      // STRONGSTRING
   return -1;
 }
 
-static const size_t asciiAlphabetLength = 128;
-
 std::array<int, asciiAlphabetLength>
 createShiftArray(std::string_view pattern) {
   std::array<int, asciiAlphabetLength> result;
@@ -28,7 +24,7 @@ createShiftArray(std::string_view pattern) {
     result[i] = pattern.length();
   }
 
-  for (int i = 0; i < pattern.length() - 1; i++) {
+  for (int i = 0; i < static_cast<int>(pattern.length() - 1); i++) {
     result[pattern[i]] = 1;
   }
 
@@ -48,7 +44,7 @@ int prefixShift(std::string_view text, std::string_view pattern) {
     if (p < 0) {
       return t;
     }
-    t += shift[text[t + p + 1]];
+    t += shift[text[t + p]];
   }
 
   return -1;
@@ -61,8 +57,8 @@ createShiftArrayWithIndent(std::string_view pattern) {
   for (int i = 0; i < asciiAlphabetLength; i++) {
     result[i] = pattern.length();
   }
-  for (int i = 0; i < static_cast<int>(pattern.length()); i++) {
-    result[pattern[i]] = pattern.length() - i;
+  for (int i = 0; i < static_cast<int>(pattern.length() - 1); i++) {
+    result[pattern[i]] = pattern.length() - i - 1;
   }
 
   return result;
@@ -81,7 +77,7 @@ int suffixShift(std::string_view text, std::string_view pattern) {
     if (p < 0) {
       return t;
     }
-    t += shift[text[t + p + 1]];
+    t += shift[text[t + pattern.length() - 1]];
   }
 
   return -1;
